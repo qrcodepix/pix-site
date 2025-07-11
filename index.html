@@ -1,0 +1,97 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pagamento Pix</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    .pix-code {
+      background: #f5f5f5;
+      padding: 10px;
+      word-break: break-all;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #1976d2;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background-color 0.3s ease;
+    }
+    .copied {
+      background-color: #2e7d32 !important;
+    }
+    .qr-image {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      margin: 20px 0;
+      text-align: center;
+      padding: 10px;
+    }
+    .instructions {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>💰 PIX Copia e Cola</h2>
+
+  <div class="pix-code" id="pixCode">
+    00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR  SOLUCOES E6007BARUERI61080645400062070503***6304CA46
+  </div>
+
+  <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
+
+  <div class="qr-image">
+    <p><strong>📷 Escaneie o QR Code abaixo:</strong></p>
+    <img src="https://i.ibb.co/ShBdktB/a59b59ff-b498-42e8-8e7d-7fe29396e6c0.jpg" alt="QR Code Pix" width="300" />
+  </div>
+
+  <div class="instructions">
+    <p>🅰️ <strong>Opção 1 – Copia e Cola</strong><br>
+    1️⃣ Segure o dedo em cima do código até aparecer “Copiar”.<br>
+    2️⃣ Toque em Copiar.<br>
+    3️⃣ Abra o app do seu banco.<br>
+    4️⃣ Vá em Pix → Pix Copia e Cola.<br>
+    5️⃣ Cole o código (segure o dedo e toque em “Colar”).<br>
+    6️⃣ Confirme o valor e pague. ✅</p>
+
+    <p>🅱️ <strong>Opção 2 – Ler QR Code com a câmera</strong><br>
+    1️⃣ Abra o app do seu banco.<br>
+    2️⃣ Vá em Pix → Ler QR Code.<br>
+    3️⃣ Aponte a câmera para o QR Code que foi enviado.<br>
+    4️⃣ Confirme o valor e pague. ✅</p>
+
+    <p><em>11 de julho de 2025 às 19:18</em></p>
+  </div>
+
+  <script>
+    function copyPixCode() {
+      const pixText = document.getElementById("pixCode").innerText;
+      const button = document.getElementById("copyBtn");
+      navigator.clipboard.writeText(pixText).then(() => {
+        button.classList.add("copied");
+        button.innerText = "✅ Código Copiado!";
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerText = "📋 Copiar código Pix";
+        }, 3000);
+      });
+    }
+  </script>
+
+</body>
+</html>
