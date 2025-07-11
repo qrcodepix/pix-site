@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pagamento Pix</title>
   <link rel="icon" href="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -14,9 +15,13 @@
       font-family: 'Inter', sans-serif;
       background-color: #f9fafb;
       color: #333;
-      max-width: 600px;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
       margin: auto;
-      padding: 40px 20px;
     }
 
     h2 {
@@ -33,27 +38,28 @@
     }
 
     .pix-logo img {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
     }
 
     .pix-code {
       background: #ffffff;
       padding: 15px;
-      word-break: break-all;
+      word-break: break-word;
       border: 1px solid #e5e7eb;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       margin-bottom: 20px;
-      font-size: 0.95em;
+      font-size: 1rem;
     }
 
     button {
-      padding: 12px 20px;
+      padding: 16px;
+      font-size: 1.1em;
       background-color: #10b981;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
       width: 100%;
@@ -80,14 +86,16 @@
     }
 
     .qr-image img {
-      max-width: 400px;
+      max-width: 100%;
+      width: 100%;
+      max-height: 500px;
       border-radius: 8px;
     }
 
     .instructions {
       margin-top: 30px;
       line-height: 1.8;
-      font-size: 16px;
+      font-size: 1rem;
     }
 
     .instructions p {
@@ -102,39 +110,41 @@
 </head>
 <body>
 
-  <div class="pix-logo">
-    <img src="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" alt="Pix Logo" />
-  </div>
+  <div class="container">
+    <div class="pix-logo">
+      <img src="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" alt="Pix Logo" />
+    </div>
 
-  <h2>PIX Copia e Cola</h2>
+    <h2>PIX Copia e Cola</h2>
 
-  <div class="pix-code" id="pixCode">
-    00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304CA46
-  </div>
+    <div class="pix-code" id="pixCode">
+      00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304CA46
+    </div>
 
-  <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
+    <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
-  <div class="qr-image">
-    <p><strong>📷 Escaneie o QR Code abaixo:</strong></p>
-    <img src="https://i.ibb.co/ShBdktB/a59b59ff-b498-42e8-8e7d-7fe29396e6c0.jpg" alt="QR Code Pix" />
-  </div>
+    <div class="qr-image">
+      <p><strong>📷 Escaneie o QR Code abaixo:</strong></p>
+      <img src="https://i.ibb.co/ShBdktB/a59b59ff-b498-42e8-8e7d-7fe29396e6c0.jpg" alt="QR Code Pix" />
+    </div>
 
-  <div class="instructions">
-    <p>🅰️ <strong>Opção 1 – Copia e Cola</strong><br>
-    1️⃣ Segure o dedo em cima do código até aparecer “Copiar”.<br>
-    2️⃣ Toque em Copiar.<br>
-    3️⃣ Abra o app do seu banco.<br>
-    4️⃣ Vá em Pix → Pix Copia e Cola.<br>
-    5️⃣ Cole o código (segure o dedo e toque em “Colar”).<br>
-    6️⃣ Confirme o valor e pague. ✅</p>
+    <div class="instructions">
+      <p>🅰️ <strong>Opção 1 – Copia e Cola</strong><br>
+      1️⃣ Segure o dedo em cima do código até aparecer “Copiar”.<br>
+      2️⃣ Toque em Copiar.<br>
+      3️⃣ Abra o app do seu banco.<br>
+      4️⃣ Vá em Pix → Pix Copia e Cola.<br>
+      5️⃣ Cole o código (segure o dedo e toque em “Colar”).<br>
+      6️⃣ Confirme o valor e pague. ✅</p>
 
-    <p>🅱️ <strong>Opção 2 – Ler QR Code com a câmera</strong><br>
-    1️⃣ Abra o app do seu banco.<br>
-    2️⃣ Vá em Pix → Ler QR Code.<br>
-    3️⃣ Aponte a câmera para o QR Code que foi enviado.<br>
-    4️⃣ Confirme o valor e pague. ✅</p>
+      <p>🅱️ <strong>Opção 2 – Ler QR Code com a câmera</strong><br>
+      1️⃣ Abra o app do seu banco.<br>
+      2️⃣ Vá em Pix → Ler QR Code.<br>
+      3️⃣ Aponte a câmera para o QR Code que foi enviado.<br>
+      4️⃣ Confirme o valor e pague. ✅</p>
 
-    <p><em>11 de julho de 2025 às 19:18</em></p>
+      <p><em>11 de julho de 2025 às 19:18</em></p>
+    </div>
   </div>
 
   <script>
@@ -142,4 +152,15 @@
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
       navigator.clipboard.writeText(pixText).then(() => {
-        button.classList.add("copied")
+        button.classList.add("copied");
+        button.innerText = "✅ Código Copiado!";
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.innerText = "📋 Copiar código Pix";
+        }, 3000);
+      });
+    }
+  </script>
+
+</body>
+</html>
