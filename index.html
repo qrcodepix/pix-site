@@ -1,47 +1,91 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <title>Pagamento Pix</title>
+  <link rel="icon" href="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: sans-serif;
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #333;
       max-width: 600px;
       margin: auto;
-      padding: 20px;
+      padding: 40px 20px;
     }
+
+    h2 {
+      color: #111827;
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
     .pix-code {
-      background: #f5f5f5;
-      padding: 10px;
+      background: #ffffff;
+      padding: 15px;
       word-break: break-all;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-    button {
-      padding: 10px 15px;
-      border: none;
-      background-color: #1976d2;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #10b981;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
       transition: background-color 0.3s ease;
     }
+
+    button:hover {
+      background-color: #059669;
+    }
+
     .copied {
-      background-color: #2e7d32 !important;
+      background-color: #059669 !important;
     }
+
     .qr-image {
-      width: 100%;
-      height: auto;
-      border: 1px solid #ccc;
-      margin: 20px 0;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
       text-align: center;
-      padding: 10px;
+      padding: 20px;
+      margin-top: 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
+
+    .qr-image img {
+      max-width: 200px;
+      border-radius: 8px;
+    }
+
     .instructions {
-      line-height: 1.6;
+      margin-top: 30px;
+      line-height: 1.8;
       font-size: 16px;
+    }
+
+    .instructions p {
+      margin-bottom: 20px;
+    }
+
+    em {
+      color: #6b7280;
+      font-size: 0.9em;
     }
   </style>
 </head>
@@ -50,14 +94,14 @@
   <h2>💰 PIX Copia e Cola</h2>
 
   <div class="pix-code" id="pixCode">
-    00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR  SOLUCOES E6007BARUERI61080645400062070503***6304CA46
+    00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304CA46
   </div>
 
   <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
   <div class="qr-image">
     <p><strong>📷 Escaneie o QR Code abaixo:</strong></p>
-    <img src="https://i.ibb.co/ShBdktB/a59b59ff-b498-42e8-8e7d-7fe29396e6c0.jpg" alt="QR Code Pix" width="300" />
+    <img src="https://i.ibb.co/ShBdktB/a59b59ff-b498-42e8-8e7d-7fe29396e6c0.jpg" alt="QR Code Pix" />
   </div>
 
   <div class="instructions">
