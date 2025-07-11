@@ -23,7 +23,18 @@
       color: #111827;
       font-size: 1.8em;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+
+    .pix-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .pix-logo img {
+      width: 48px;
+      height: 48px;
     }
 
     .pix-code {
@@ -69,7 +80,7 @@
     }
 
     .qr-image img {
-      max-width: 200px;
+      max-width: 400px;
       border-radius: 8px;
     }
 
@@ -91,7 +102,11 @@
 </head>
 <body>
 
-  <h2>💰 PIX Copia e Cola</h2>
+  <div class="pix-logo">
+    <img src="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" alt="Pix Logo" />
+  </div>
+
+  <h2>PIX Copia e Cola</h2>
 
   <div class="pix-code" id="pixCode">
     00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/96CF1F870F12042D6755ED48914AD32ABC05204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304CA46
@@ -127,15 +142,4 @@
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
       navigator.clipboard.writeText(pixText).then(() => {
-        button.classList.add("copied");
-        button.innerText = "✅ Código Copiado!";
-        setTimeout(() => {
-          button.classList.remove("copied");
-          button.innerText = "📋 Copiar código Pix";
-        }, 3000);
-      });
-    }
-  </script>
-
-</body>
-</html>
+        button.classList.add("copied")
