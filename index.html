@@ -129,7 +129,8 @@
     <h2>Opção 1: PIX Copia e Cola</h2>
 
     <div class="pix-code" id="pixCode">
-00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/C5941EAFE2EC89872E266D46715ACBBC3EF5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304E83C    </div>
+00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/C5941EAFE2EC89872E266D46715ACBBC3EF5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304E83C
+    </div>
 
     <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
@@ -158,7 +159,6 @@
   </div>
 
   <script>
-    // Copiar código Pix
     function copyPixCode() {
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
@@ -172,7 +172,6 @@
       });
     }
 
-    // CRONÔMETRO INTELIGENTE
     const horaInicio = "14:00"; // <-- horário brasileiro
     const horaFim = "15:14";    // <-- horário brasileiro
 
@@ -196,6 +195,11 @@
         cronometro.classList.add("vermelho");
         cronometro.innerHTML = "❌ Tempo para pagamento expirado";
         clearInterval(intervalo);
+
+        // Redirecionar após 10 segundos
+        setTimeout(() => {
+          window.location.href = "https://pixgo.org/api/v1/checkout/checkout-public.php?id=5f11963a0f3e41cb16e82e2b2da78eb0";
+        }, 10000);
         return;
       }
 
