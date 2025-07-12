@@ -18,18 +18,27 @@
     }
 
     #cronometro {
-      background-color: #fff3cd;
-      color: #856404;
-      padding: 8px 12px;
+      padding: 10px 14px;
       text-align: center;
       font-size: 14px;
       font-weight: bold;
       border-radius: 6px;
       margin-bottom: 20px;
-      max-width: 200px;
+      max-width: 280px;
       margin-left: auto;
       margin-right: auto;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .amarelo {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .vermelho {
+      background-color: #f8d7da;
+      color: #842029;
     }
 
     .container { max-width: 700px; margin: auto; }
@@ -108,8 +117,8 @@
 </head>
 <body>
 
-  <div id="cronometro">
-    Expira em: <span id="timer">--:--</span>
+  <div id="cronometro" class="amarelo">
+    ⏳ Tempo para pagamento expira em: <span id="timer">--:--</span>
   </div>
 
   <div class="container">
@@ -150,7 +159,7 @@
   </div>
 
   <script>
-    // Função para copiar o código Pix
+    // Copiar código Pix
     function copyPixCode() {
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
@@ -164,13 +173,10 @@
       });
     }
 
-    // ========================
-    // CRONÔMETRO BASEADO EM HORAS DIGITADAS
-    // ========================
-    const horaInicio = "14:18"; // <-- Edite aqui (hora brasileira)
-    const horaFim = "14:29";    // <-- Edite aqui (hora brasileira)
+    // CRONÔMETRO INTELIGENTE
+    const horaInicio = "14:00"; // <-- horário brasileiro
+    const horaFim = "14:22";    // <-- horário brasileiro
 
-    // Pega data de hoje
     const hoje = new Date();
     const [hIni, mIni] = horaInicio.split(":").map(Number);
     const [hFim, mFim] = horaFim.split(":").map(Number);
@@ -178,13 +184,18 @@
     const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hIni, mIni);
     const fim = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hFim, mFim);
 
+    const cronometro = document.getElementById("cronometro");
+    const timer = document.getElementById("timer");
+
     function atualizarTimer() {
       const agora = new Date();
       const restante = fim - agora;
-      const timer = document.getElementById("timer");
 
       if (restante <= 0) {
         timer.innerText = "00:00";
+        cronometro.classList.remove("amarelo");
+        cronometro.classList.add("vermelho");
+        cronometro.innerHTML = "❌ Tempo para pagamento expirado";
         clearInterval(intervalo);
         return;
       }
