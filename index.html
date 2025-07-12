@@ -145,13 +145,13 @@
       2️⃣ Toque em Copiar.<br>
       3️⃣ Abra o app do seu banco.<br>
       4️⃣ Vá em Pix → Pix Copia e Cola.<br>
-      5️⃣ Cole o código (segure o dedo e toque em “Colar”).<br>
+      5️⃣ Cole o código.<br>
       6️⃣ Confirme o valor e pague. ✅</p>
 
       <p>🅱️ <strong>Opção 2 – Ler QR Code com a câmera</strong><br>
       1️⃣ Abra o app do seu banco.<br>
       2️⃣ Vá em Pix → Ler QR Code.<br>
-      3️⃣ Aponte a câmera para o QR Code que foi enviado.<br>
+      3️⃣ Aponte a câmera para o QR Code.<br>
       4️⃣ Confirme o valor e pague. ✅</p>
 
       <p><em>11 de julho de 2025 às 19:18</em></p>
@@ -172,7 +172,8 @@
       });
     }
 
-    const horaFim = "15:14"; // Horário final do pagamento (formato 24h)
+    // Defina aqui o horário de expiração do Pix
+    const horaFim = "15:14"; // Formato 24h
     const [hFim, mFim] = horaFim.split(":").map(Number);
     const agora = new Date();
     const fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
@@ -184,25 +185,25 @@
       window.location.href = "https://pixgo.org/api/v1/checkout/checkout-public.php?id=5f11963a0f3e41cb16e82e2b2da78eb0";
     }
 
+    function exibirExpiradoERedirecionar(imediato = false) {
+      timer.innerText = "00:00";
+      cronometro.classList.remove("amarelo");
+      cronometro.classList.add("vermelho");
+      cronometro.innerHTML = "❌ Tempo para pagamento expirado";
+      if (imediato) {
+        redirecionar();
+      } else {
+        setTimeout(redirecionar, 2000);
+      }
+    }
+
     function atualizarTimer() {
       const agoraAtual = new Date();
       const restante = fim - agoraAtual;
 
       if (restante <= 0) {
-        timer.innerText = "00:00";
-        cronometro.classList.remove("amarelo");
-        cronometro.classList.add("vermelho");
-        cronometro.innerHTML = "❌ Tempo para pagamento expirado";
         clearInterval(intervalo);
-
-        // Se o usuário acessou após o tempo, redireciona já
-        if (restante > -2000) {
-          // Cronômetro acabou agora: espera 2 segundos
-          setTimeout(redirecionar, 2000);
-        } else {
-          // Já estava expirado: redireciona imediatamente
-          redirecionar();
-        }
+        exibirExpiradoERedirecionar(false);
         return;
       }
 
@@ -211,8 +212,13 @@
       timer.innerText = `${minutos}:${segundos}`;
     }
 
-    atualizarTimer();
-    const intervalo = setInterval(atualizarTimer, 1000);
+    const agoraCheck = new Date();
+    if (agoraCheck >= fim) {
+      exibirExpiradoERedirecionar(true); // Redireciona imediatamente se já expirou
+    } else {
+      atualizarTimer();
+      var intervalo = setInterval(atualizarTimer, 1000);
+    }
   </script>
 
 </body>
