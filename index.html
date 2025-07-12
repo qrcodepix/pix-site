@@ -19,6 +19,21 @@
       padding: 20px;
     }
 
+    #cronometro {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
     .container {
       max-width: 700px;
       margin: auto;
@@ -110,6 +125,10 @@
 </head>
 <body>
 
+  <div id="cronometro">
+    Expira em: <span id="timer">20:00</span>
+  </div>
+
   <div class="container">
     <div class="pix-logo">
       <img src="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" alt="Pix Logo" />
@@ -119,6 +138,8 @@
 
     <div class="pix-code" id="pixCode">
 00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/AE81711310801DF6D48667856C242C7111C5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***630440D9
+    </div>
+
     <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
     <div class="qr-image">
@@ -146,6 +167,7 @@
   </div>
 
   <script>
+    // Função para copiar o código Pix
     function copyPixCode() {
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
@@ -158,6 +180,31 @@
         }, 3000);
       });
     }
+
+    // Cronômetro simples baseado em horário fixo de lançamento
+    const inicio = new Date("2025-07-12T15:00:00Z"); // Altere aqui o horário de lançamento
+    const duracaoMinutos = 20;
+    const fim = new Date(inicio.getTime() + duracaoMinutos * 60000);
+
+    function atualizarTimer() {
+      const agora = new Date();
+      const restante = fim - agora;
+      const timerElement = document.getElementById("timer");
+
+      if (restante <= 0) {
+        timerElement.innerText = "00:00";
+        clearInterval(intervalo);
+        return;
+      }
+
+      const minutos = String(Math.floor(restante / 60000)).padStart(2, '0');
+      const segundos = String(Math.floor((restante % 60000) / 1000)).padStart(2, '0');
+
+      timerElement.innerText = `${minutos}:${segundos}`;
+    }
+
+    atualizarTimer();
+    const intervalo = setInterval(atualizarTimer, 1000);
   </script>
 
 </body>
