@@ -167,7 +167,6 @@
   </div>
 
   <script>
-    // Função para copiar o código Pix
     function copyPixCode() {
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
@@ -181,10 +180,21 @@
       });
     }
 
-    // Cronômetro simples baseado em horário fixo de lançamento
-    const inicio = new Date("2025-07-12T15:00:00Z"); // Altere aqui o horário de lançamento
+    // === CONFIGURAÇÃO DO CRONÔMETRO ===
+    const inicioString = "2025-07-12 14:02"; // <-- coloque aqui a data/hora de início (Brasília)
     const duracaoMinutos = 20;
-    const fim = new Date(inicio.getTime() + duracaoMinutos * 60000);
+
+    // Converte para UTC (considerando fuso -3 de Brasília)
+    const partes = inicioString.split(/[- :]/);
+    const inicioUTC = new Date(Date.UTC(
+      partes[0],           // ano
+      partes[1] - 1,       // mês (0-11)
+      partes[2],           // dia
+      partes[3] - 3,       // hora BR para UTC
+      partes[4]            // minuto
+    ));
+
+    const fim = new Date(inicioUTC.getTime() + duracaoMinutos * 60000);
 
     function atualizarTimer() {
       const agora = new Date();
