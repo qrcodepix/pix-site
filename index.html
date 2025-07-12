@@ -7,9 +7,7 @@
   <link rel="icon" href="https://img.icons8.com/?size=256&id=Dk4sj0EM4b20&format=png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -34,10 +32,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-    }
+    .container { max-width: 700px; margin: auto; }
 
     h2 {
       color: #111827;
@@ -52,10 +47,7 @@
       margin-bottom: 10px;
     }
 
-    .pix-logo img {
-      width: 56px;
-      height: 56px;
-    }
+    .pix-logo img { width: 56px; height: 56px; }
 
     .pix-code {
       background: #ffffff;
@@ -82,13 +74,9 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #059669;
-    }
+    button:hover { background-color: #059669; }
 
-    .copied {
-      background-color: #059669 !important;
-    }
+    .copied { background-color: #059669 !important; }
 
     .qr-image {
       background: #ffffff;
@@ -113,20 +101,15 @@
       font-size: 1rem;
     }
 
-    .instructions p {
-      margin-bottom: 20px;
-    }
+    .instructions p { margin-bottom: 20px; }
 
-    em {
-      color: #6b7280;
-      font-size: 0.9em;
-    }
+    em { color: #6b7280; font-size: 0.9em; }
   </style>
 </head>
 <body>
 
   <div id="cronometro">
-    Expira em: <span id="timer">20:00</span>
+    Expira em: <span id="timer">--:--</span>
   </div>
 
   <div class="container">
@@ -167,6 +150,7 @@
   </div>
 
   <script>
+    // Função para copiar o código Pix
     function copyPixCode() {
       const pixText = document.getElementById("pixCode").innerText;
       const button = document.getElementById("copyBtn");
@@ -180,37 +164,34 @@
       });
     }
 
-    // === CONFIGURAÇÃO DO CRONÔMETRO ===
-    const inicioString = "2025-07-12 14:02"; // <-- coloque aqui a data/hora de início (Brasília)
-    const duracaoMinutos = 20;
+    // ========================
+    // CRONÔMETRO BASEADO EM HORAS DIGITADAS
+    // ========================
+    const horaInicio = "14:00"; // <-- Edite aqui (hora brasileira)
+    const horaFim = "14:10";    // <-- Edite aqui (hora brasileira)
 
-    // Converte para UTC (considerando fuso -3 de Brasília)
-    const partes = inicioString.split(/[- :]/);
-    const inicioUTC = new Date(Date.UTC(
-      partes[0],           // ano
-      partes[1] - 1,       // mês (0-11)
-      partes[2],           // dia
-      partes[3] - 3,       // hora BR para UTC
-      partes[4]            // minuto
-    ));
+    // Pega data de hoje
+    const hoje = new Date();
+    const [hIni, mIni] = horaInicio.split(":").map(Number);
+    const [hFim, mFim] = horaFim.split(":").map(Number);
 
-    const fim = new Date(inicioUTC.getTime() + duracaoMinutos * 60000);
+    const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hIni, mIni);
+    const fim = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hFim, mFim);
 
     function atualizarTimer() {
       const agora = new Date();
       const restante = fim - agora;
-      const timerElement = document.getElementById("timer");
+      const timer = document.getElementById("timer");
 
       if (restante <= 0) {
-        timerElement.innerText = "00:00";
+        timer.innerText = "00:00";
         clearInterval(intervalo);
         return;
       }
 
       const minutos = String(Math.floor(restante / 60000)).padStart(2, '0');
       const segundos = String(Math.floor((restante % 60000) / 1000)).padStart(2, '0');
-
-      timerElement.innerText = `${minutos}:${segundos}`;
+      timer.innerText = `${minutos}:${segundos}`;
     }
 
     atualizarTimer();
