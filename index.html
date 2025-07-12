@@ -172,22 +172,19 @@
       });
     }
 
-    const horaInicio = "14:00"; // <-- horário brasileiro
-    const horaFim = "15:14";    // <-- horário brasileiro
+    // Defina aqui o horário final do pagamento
+    const horaFim = "15:14"; // horário brasileiro (formato 24h)
 
-    const hoje = new Date();
-    const [hIni, mIni] = horaInicio.split(":").map(Number);
     const [hFim, mFim] = horaFim.split(":").map(Number);
-
-    const inicio = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hIni, mIni);
-    const fim = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), hFim, mFim);
+    const agora = new Date();
+    const fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
 
     const cronometro = document.getElementById("cronometro");
     const timer = document.getElementById("timer");
 
     function atualizarTimer() {
-      const agora = new Date();
-      const restante = fim - agora;
+      const agoraAtualizado = new Date();
+      const restante = fim - agoraAtualizado;
 
       if (restante <= 0) {
         timer.innerText = "00:00";
@@ -196,10 +193,11 @@
         cronometro.innerHTML = "❌ Tempo para pagamento expirado";
         clearInterval(intervalo);
 
-        // Redirecionar após 10 segundos
+        // Redirecionar após 3 segundos
         setTimeout(() => {
           window.location.href = "https://pixgo.org/api/v1/checkout/checkout-public.php?id=5f11963a0f3e41cb16e82e2b2da78eb0";
-        }, 10000);
+        }, 3000);
+
         return;
       }
 
