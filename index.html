@@ -129,14 +129,13 @@
     <h2>Opção 1: PIX Copia e Cola</h2>
 
     <div class="pix-code" id="pixCode">
-00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/C5941EAFE2EC89872E266D46715ACBBC3EF5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304E83C
-    </div>
+00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/31E79B7AC84E8331B216401D5556017E3C45204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304F994    </div>
 
     <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
     <div class="qr-image">
       <p><strong>📷 Opção 2: Escaneie o Pix QR Code abaixo usando o app do banco:</strong></p>
-      <img src="https://response.eulen.app/api-response/44824635-fda0-4af5-9f62-16e5263cdd29-qr.png" alt="QR Code Pix" />
+      <img src="https://response.eulen.app/api-response/68a89e1f-575b-4f6d-b9d6-96909a9f6da2-qr.png" alt="QR Code Pix" />
     </div>
 
     <div class="instructions">
@@ -173,7 +172,7 @@
     }
 
     // Defina aqui o horário de expiração do Pix
-    const horaFim = "15:29"; // Formato 24h
+    const horaFim = "17:55"; // Formato 24h
     const [hFim, mFim] = horaFim.split(":").map(Number);
     const agora = new Date();
     const fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
