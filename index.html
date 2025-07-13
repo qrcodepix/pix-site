@@ -100,7 +100,7 @@
     .qr-image img {
       max-width: 100%;
       width: 100%;
-      max-height: 400px;
+      max-height: 500px;
       border-radius: 8px;
     }
 
@@ -129,23 +129,22 @@
     <h2>Opção 1: PIX Copia e Cola</h2>
 
     <div class="pix-code" id="pixCode">
-00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/00FB4713F86900A5E27F6888DACCF3EED5B5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***63045E58    </div>
+00020101021226860014br.gov.bcb.pix2564qrcode.fitbank.com.br/QR/cob/C5941EAFE2EC89872E266D46715ACBBC3EF5204000053039865802BR5925PLEBANK.COM.BR SOLUCOES E6007BARUERI61080645400062070503***6304E83C
+    </div>
 
     <button id="copyBtn" onclick="copyPixCode()">📋 Copiar código Pix</button>
 
     <div class="qr-image">
       <p><strong>📷 Opção 2: Escaneie o Pix QR Code abaixo usando o app do banco:</strong></p>
-      <img src="https://response.eulen.app/api-response/fb34e316-bf10-4f6c-a1fe-e31a54a6b11b-qr.png" alt="QR Code Pix" />
+      <img src="https://response.eulen.app/api-response/44824635-fda0-4af5-9f62-16e5263cdd29-qr.png" alt="QR Code Pix" />
     </div>
 
     <div class="instructions">
       <p>🅰️ <strong>Opção 1 – Copia e Cola</strong><br>
-      1️⃣ Segure o dedo em cima do código até aparecer “Copiar”.<br>
-      2️⃣ Toque em Copiar.<br>
-      3️⃣ Abra o app do seu banco.<br>
-      4️⃣ Vá em Pix → Pix Copia e Cola.<br>
-      5️⃣ Cole o código.<br>
-      6️⃣ Confirme o valor e pague. ✅</p>
+      1️⃣ Copie o código acima.<br>
+      2️⃣ Abra o app do seu banco.<br>
+      3️⃣ Vá em Pix → Pix Copia e Cola.<br>
+      4️⃣ Cole o código e confirme o valor. ✅</p>
 
       <p>🅱️ <strong>Opção 2 – Ler QR Code com a câmera</strong><br>
       1️⃣ Abra o app do seu banco.<br>
@@ -153,7 +152,7 @@
       3️⃣ Aponte a câmera para o QR Code.<br>
       4️⃣ Confirme o valor e pague. ✅</p>
 
-      <p><em>11 de julho de 2025 às 19:18</em></p>
+      <p><em>Gerado em: 11 de julho de 2025 às 19:18</em></p>
     </div>
   </div>
 
@@ -171,11 +170,16 @@
       });
     }
 
-    // Defina aqui o horário de expiração do Pix
-    const horaFim = "20:18; // Formato 24h
+    const horaFim = "00:05"; // ⏰ Ajuste aqui o horário do vencimento (formato 24h)
     const [hFim, mFim] = horaFim.split(":").map(Number);
+
     const agora = new Date();
-    const fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
+    let fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
+
+    // ✅ Corrigir se a hora final for depois da meia-noite (ex: 00:05)
+    if (fim < agora) {
+      fim.setDate(fim.getDate() + 1);
+    }
 
     const cronometro = document.getElementById("cronometro");
     const timer = document.getElementById("timer");
@@ -213,7 +217,7 @@
 
     const agoraCheck = new Date();
     if (agoraCheck >= fim) {
-      exibirExpiradoERedirecionar(true); // Redireciona imediatamente se já expirou
+      exibirExpiradoERedirecionar(true);
     } else {
       atualizarTimer();
       var intervalo = setInterval(atualizarTimer, 1000);
