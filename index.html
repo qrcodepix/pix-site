@@ -152,7 +152,7 @@
       3️⃣ Aponte a câmera para o QR Code.<br>
       4️⃣ Confirme o valor e pague. ✅</p>
 
-      <p><em>Gerado em: 11 de julho de 2025 às 19:18</em></p>
+      <p><em>Gerado automaticamente</em></p>
     </div>
   </div>
 
@@ -170,16 +170,10 @@
       });
     }
 
-    const horaFim = "00:05"; // ⏰ Ajuste aqui o horário do vencimento (formato 24h)
-    const [hFim, mFim] = horaFim.split(":").map(Number);
-
+    // ⏱ Tempo de pagamento em minutos
+    const minutosParaPagar = 15;
     const agora = new Date();
-    let fim = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate(), hFim, mFim);
-
-    // ✅ Corrigir se a hora final for depois da meia-noite (ex: 00:05)
-    if (fim < agora) {
-      fim.setDate(fim.getDate() + 1);
-    }
+    const fim = new Date(agora.getTime() + minutosParaPagar * 60000);
 
     const cronometro = document.getElementById("cronometro");
     const timer = document.getElementById("timer");
@@ -188,7 +182,7 @@
       window.location.href = "https://pixgo.org/api/v1/checkout/checkout-public.php?id=5f11963a0f3e41cb16e82e2b2da78eb0";
     }
 
-    function exibirExpiradoERedirecionar(imediato = false) {
+    function exibirExpirado(imediato = false) {
       timer.innerText = "00:00";
       cronometro.classList.remove("amarelo");
       cronometro.classList.add("vermelho");
@@ -206,7 +200,7 @@
 
       if (restante <= 0) {
         clearInterval(intervalo);
-        exibirExpiradoERedirecionar(false);
+        exibirExpirado(false);
         return;
       }
 
@@ -215,9 +209,9 @@
       timer.innerText = `${minutos}:${segundos}`;
     }
 
-    const agoraCheck = new Date();
-    if (agoraCheck >= fim) {
-      exibirExpiradoERedirecionar(true);
+    // Checagem imediata se já expirou (ex: cliente entrou depois de 15 min)
+    if (new Date() >= fim) {
+      exibirExpirado(true);
     } else {
       atualizarTimer();
       var intervalo = setInterval(atualizarTimer, 1000);
